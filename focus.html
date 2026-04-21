@@ -1,0 +1,431 @@
+
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>2H Focus</title><style>@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap');html,body{height:100%;margin:0;padding:0;background:#13151a;font-family:'Roboto Mono',monospace;font-size:12px;line-height:1;color:#fff;overflow-x:hidden}*{box-sizing:border-box}.top{display:flex;align-items:center;gap:24px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.12)}
+.top-filters{gap:16px;padding:8px 16px;border-bottom:1px solid rgba(255,255,255,0.08)}.logo{font-size:14px;font-weight:600;color:#fff;white-space:nowrap}select{background:transparent;border:none;outline:none;font-family:'Roboto Mono',monospace;font-size:12px;color:#fff;cursor:pointer;-webkit-appearance:none}select option{background:#13151a;color:#fff}.sr{margin-left:auto}.sr input{background:transparent;border:none;outline:none;border-bottom:1px solid rgba(255,255,255,0.25);font-family:'Roboto Mono',monospace;font-size:12px;color:#fff;width:160px;padding:2px 0}.sr input::placeholder{color:rgba(255,255,255,0.6)}.sr input:focus{border-bottom-color:#fff}.wrap{overflow-x:auto;overflow-y:auto;height:calc(100vh - 84px);-webkit-overflow-scrolling:touch}table{border-collapse:separate;border-spacing:0;width:max-content}thead{position:sticky;top:0;background:#13151a;z-index:10}tr.gh>th{font-size:11px;font-weight:600;color:#fff!important;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px 5px 0;text-align:left;background:#13151a;cursor:default;white-space:nowrap;border:none}tr.gh>th.blank{padding:0}tr.gh>th:first-child{padding-left:16px}tr.gh>th.gend{padding-right:32px!important}td.gsep{padding-left:24px!important}tr.ch>th.gsep{padding-left:24px!important}tr.gh>th.gsep{padding-left:24px!important}td.gsep-lg{padding-left:36px!important}tr.ch>th.gsep-lg{padding-left:36px!important}tr.gh>th.gsep-lg{padding-left:36px!important}tr.ch>th{font-size:12px;font-weight:600;color:#fff!important;padding:4px 12px 5px 0;text-align:left!important;background:#13151a;border-bottom:1px solid rgba(255,255,255,0.15);cursor:pointer;white-space:nowrap;user-select:none}tr.ch>th:first-child{padding-left:16px}tr.ch>th:hover{color:#00e676!important}tr.ch>th.s{color:#00e676!important}tr.ch>th.gend{padding-right:32px!important}td{padding:0 12px 0 0;height:26px;border:none;vertical-align:middle;white-space:nowrap;text-align:left;font-size:12px;color:#fff!important}td:first-child{padding-left:16px}td.gend{padding-right:32px!important}tr:hover>td{background:rgba(255,255,255,0.04)}.cg{color:#00e676!important}.cr{color:#ff1744!important}.cw{color:#fff!important}.cdim{color:rgba(255,255,255,0.2)!important}.msg{padding:40px 16px;color:rgba(255,255,255,0.25);font-size:12px}::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:#13151a}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px}.tip{position:relative;cursor:help}.tip::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);left:0;background:#0d0f13;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:11px;font-weight:400;line-height:1.6;padding:8px 10px;border-radius:4px;width:360px;white-space:pre-line;z-index:100;pointer-events:none;opacity:0;transition:opacity 0.15s;font-family:'Roboto Mono',monospace;letter-spacing:0}.tip:hover::after{opacity:1}.nav-link{font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;font-family:'Roboto Mono',monospace;letter-spacing:0.05em;user-select:none;transition:color 0.15s;text-decoration:none}.nav-link:hover{color:#fff}.spec-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center}.spec-overlay.on{display:flex}.spec-modal{background:#0d0f13;border:1px solid rgba(255,255,255,0.2);width:min(900px,95vw);max-height:90vh;display:flex;flex-direction:column;font-family:'Roboto Mono',monospace}.spec-head{display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.15);flex-shrink:0}.spec-head .t{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.05em}.spec-head .m{font-size:11px;color:rgba(255,255,255,0.4);margin-left:auto}.spec-head .x{font-size:16px;color:rgba(255,255,255,0.5);cursor:pointer;padding:0 4px;user-select:none}.spec-head .x:hover{color:#fff}.spec-body{overflow-y:auto;padding:16px 20px;font-size:11px;line-height:1.55;color:#d8d8d8;white-space:pre-wrap;font-family:'Roboto Mono',monospace;word-wrap:break-word}.spec-body::-webkit-scrollbar{width:6px}.spec-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15)}.flag{display:inline-block;font-size:10px;color:rgba(255,255,255,0.7);margin-right:6px;letter-spacing:0.05em}
+
+tr.ch>th:first-child{position:sticky;left:0;background:#13151a;z-index:11}
+tr.gh>th:first-child{position:sticky;left:0;background:#13151a;z-index:11}
+tbody td:first-child{position:sticky;left:0;background:#13151a;z-index:5}
+tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
+
+<div class="top top-nav">
+  <span class="logo" style="cursor:pointer" onclick="location.reload()">2H · FOCUS</span>
+  <span class="nav-link" onclick="openSpec()" title="System specification">[SPEC]</span>
+  <a class="nav-link" href="../Consensus/" title="Switch to full fact dashboard">[DATA]</a>
+  <select onchange="setWL(this.value)" style="margin-left:8px">
+    <option value="UK ETFS">UK</option>
+    <option value="MAIN">US</option>
+  </select>
+  <div class="sr"><input id="sr" placeholder="Search…" oninput="af()"></div>
+</div>
+<div class="top top-filters">
+  <select id="ssel" onchange="setScan(this.value)">
+    <option value="">All Scans</option>
+    <option value="clean_uptrend">Clean Uptrend</option>
+    <option value="uptrend_oversold">Uptrend + Oversold</option>
+    <option value="uptrend_stretched">Uptrend + Stretched</option>
+    <option value="bottom_bull">Bottom Forming + Bull</option>
+    <option value="range_emerging">Range + Emerging Mom</option>
+    <option value="structure_cracked">Uptrend Fail / Top Forming</option>
+    <option value="conviction">Conviction (Speed + Volume)</option>
+    <option value="fading">Fading (Trend > Mom)</option>
+  </select>
+  <select id="gsel" onchange="setGrp(this.value)">
+    <option value="">All Groups</option>
+  </select>
+  <select id="psel" onchange="setPivot(this.value)">
+    <option value="">All Pivots</option>
+    <option value="UPTREND_STRONG">Uptrend Strong</option>
+    <option value="UPTREND_OK">Uptrend OK</option>
+    <option value="UPTREND_FAIL">Uptrend Fail</option>
+    <option value="TOP_FORMING">Top Forming</option>
+    <option value="RANGE">Range</option>
+    <option value="BOTTOM_FORMING">Bottom Forming</option>
+    <option value="DOWNTREND_FAIL">Downtrend Fail</option>
+    <option value="DOWNTREND_OK">Downtrend OK</option>
+    <option value="DOWNTREND_STRONG">Downtrend Strong</option>
+    <option value="INSUFFICIENT">Insufficient</option>
+  </select>
+  <select id="tmsel" onchange="setTM(this.value)">
+    <option value="">All T×M</option>
+    <option value="BULL_ACCEL">Bull Accel</option>
+    <option value="BULL_ESTAB">Bull Estab</option>
+    <option value="BEAR_DECEL">Bear Decel</option>
+    <option value="BEAR_ACCEL">Bear Accel</option>
+    <option value="BEAR_ESTAB">Bear Estab</option>
+    <option value="BULL_DECEL">Bull Decel</option>
+  </select>
+  <select id="fsel" onchange="setFlag(this.value)">
+    <option value="">All Flags</option>
+    <option value="stretched uptrend">Stretched Uptrend</option>
+    <option value="oversold uptrend">Oversold Uptrend</option>
+    <option value="stretched turn">Stretched Turn</option>
+    <option value="oversold turn">Oversold Turn</option>
+    <option value="trend > mom">Trend > Mom</option>
+    <option value="mom > trend">Mom > Trend</option>
+    <option value="speed + volume">Speed + Volume</option>
+    <option value="speed − volume">Speed − Volume</option>
+    <option value="MULTI">Multi-Flag (2+)</option>
+  </select>
+</div>
+
+<div class="wrap"><table>
+  <thead>
+    <tr class="gh">
+      <th class="blank" colspan="2"></th>
+      <th colspan="2" class="gsep-lg gend">Position</th>
+      <th colspan="2" class="gsep gend">Raw Signals</th>
+      <th colspan="4" class="gsep gend">Direction</th>
+      <th colspan="2" class="gsep gend">State</th>
+      <th colspan="1" class="gsep gend">Flags</th>
+      <th colspan="2" class="gsep">Recent</th>
+    </tr>
+    <tr class="ch">
+      <th style="min-width:70px;padding-left:16px" onclick="sb('symbol')">Ticker</th>
+      <th style="min-width:80px;max-width:100px" onclick="sb('group_name')">Group</th>
+
+      <th class="gsep-lg tip" style="min-width:54px" onclick="sb('rank_alignment')"
+          data-tip="RANK&#10;&#10;WHAT&#10;Your primary anchor — position in the universe by net Q-score (all 7 Q-scores combined).&#10;&#10;HOW TO USE&#10;Top quartile (green) is leadership. Bottom quartile (red) is broken down. Middle (white) is mid-pack. Sort by this to order the universe by overall strength. Sub-ranks in Direction section tell you which dimensions drive the rank.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK() over net_score (Q1+Q2+Q3+Q4+Q5+Q6+Q7) within each watchlist.&#10;&#10;COLOUR&#10;Green: top 25%. Red: bottom 25%. White: middle half.">Rank</th>
+      <th class="tip gend" style="min-width:48px" onclick="sb('fact_rank_move')"
+          data-tip="R MV&#10;&#10;WHAT&#10;Rank positions this ticker has moved since yesterday.&#10;&#10;HOW TO USE&#10;Big movers (|R Mv| > 20) signal change. Positive = climbing toward rank 1. Negative = falling.&#10;&#10;HOW CONSTRUCTED&#10;Yesterday's rank_alignment minus today's. Requires ≥ 2 days of snapshot data.&#10;&#10;CURRENT STATE&#10;Snapshot capture active since 20 Apr 2026. Will populate meaningfully once ~3 days of history accumulate.">R Mv</th>
+
+      <th class="gsep tip" style="min-width:52px" onclick="sb('trend')"
+          data-tip="TREND&#10;&#10;WHAT&#10;Raw 63-bar trend composite — the long-horizon directional score.&#10;&#10;HOW TO USE&#10;80+ is monster. 50-80 solid. 20-50 mid. Below 0 = long-horizon down.&#10;Compare vs Mom: Trend > Mom = trend established. Mom > Trend = momentum leading (early-stage or fresh breakout).&#10;&#10;HOW CONSTRUCTED&#10;Pine Script 63-bar methodology, from r_universe_live.trend.&#10;&#10;RANGE: -100 to +100.">Trend</th>
+      <th class="tip gend" style="min-width:52px" onclick="sb('momentum')"
+          data-tip="MOM&#10;&#10;WHAT&#10;Raw 21-bar momentum composite — shorter-horizon directional score.&#10;&#10;HOW TO USE&#10;Faster than Trend. Catches moves earlier but with more noise. 80+ strong. Mom leading Trend = early-stage bullish move. Trend leading Mom = established trend possibly losing momentum.&#10;&#10;HOW CONSTRUCTED&#10;Same Pine Script family as Trend but 21-bar window.&#10;&#10;RANGE: -100 to +100.">Mom</th>
+
+      <th class="gsep tip" style="min-width:60px" onclick="sb('q1_rank')"
+          data-tip="T.RANK&#10;&#10;WHAT&#10;Rank on Q1 Trend (the multi-pair trend composite) within this watchlist.&#10;&#10;HOW TO USE&#10;Compare to main Rank. If T.Rank much better than Rank, this is a trend leader held back by other dimensions. If worse, main Rank is being carried by non-trend factors.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK over Q1 score. Q1 built from 8 pairs (trend × momentum, trend × vol_regime, trend × rel_vol, structure × pct_to_ph, trend × trend_z_60d, and more).">T.Rank</th>
+      <th class="tip" style="min-width:60px" onclick="sb('q2_rank')"
+          data-tip="M.RANK&#10;&#10;WHAT&#10;Rank on Q2 Momentum (short-horizon composite).&#10;&#10;HOW TO USE&#10;M.Rank better than T.Rank = momentum leading trend (early-stage). M.Rank worse = trend established while near-term slows.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK over Q2 score. Q2 built from 4 pairs (momentum × trend, momentum × mom_d5, momentum × rel_vol, momentum × mom_z_60d). Tiebroken by Q1.">M.Rank</th>
+      <th class="tip" style="min-width:60px" onclick="sb('q3_rank')"
+          data-tip="VEL.RANK&#10;&#10;WHAT&#10;Rank on Q3 Acceleration — velocity of the move.&#10;&#10;HOW TO USE&#10;Top 10 = universe's strongest accelerators. A top-ranked leader slipping to Vel.Rank 50+ is losing steam — early warning.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK over Q3 score. Q3 built from 3 pairs (trend × trend_d5, momentum × mom_d5, mom_d5 × mom_d10). Tiebroken by Q1.">Vel.Rank</th>
+      <th class="tip gend" style="min-width:60px" onclick="sb('q4_rank')"
+          data-tip="VOL.RANK&#10;&#10;WHAT&#10;Rank on Q4 Volume — whether volume is confirming the price move.&#10;&#10;HOW TO USE&#10;High Vol.Rank = volume backing the move. Low = price moving on fading/quiet participation (weaker signal).&#10;&#10;CAVEAT&#10;UK-listed ETFs on non-UK underlyings may show noisy rel_vol (trading on LSE while underlying trades elsewhere). Rank absorbs some noise but treat Q4 with caution for those tickers.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK over Q4 score. Q4 built from 7 pairs spanning trend/momentum/structure × rel_vol, breakout × volume, price_z × rel_vol (distribution/accumulation).">Vol.Rank</th>
+
+      <th class="gsep tip" style="min-width:140px" onclick="sb('structure_3p')"
+          data-tip="PIVOT STATE&#10;&#10;WHAT&#10;3-pivot structure classification — geometric pattern across last 3 pivot highs and 3 pivot lows.&#10;&#10;HOW TO USE&#10;Only column that identifies RANGE (oscillating, not trending). Everything else tells you strength direction; this tells you chart SHAPE.&#10;&#10;STATES:&#10;  UPTREND STRONG — 3 HHs + 3 HLs (staircase up)&#10;  UPTREND OK — uptrend, one wavering sequence&#10;  UPTREND FAIL — rising highs but first meaningful lower low (crack)&#10;  TOP FORMING — highs rolling over&#10;  RANGE — oscillating, no progression&#10;  BOTTOM FORMING — lows rising&#10;  DOWNTREND FAIL — falling highs but latest low holding&#10;  DOWNTREND OK — clear downtrend, one wavering sequence&#10;  DOWNTREND STRONG — 3 LLs + 3 LHs&#10;  — INSUFFICIENT — fewer than 3 confirmed pivots&#10;&#10;HOW CONSTRUCTED&#10;10-bar-confirmed fractal pivots (v3 April 2026) with 1.5% magnitude threshold filtering sub-noise breaks. Most recent pivot is ~10+ days old by design — slow signal.&#10;&#10;COLOUR&#10;Green: UPTREND STRONG/OK. Red: DOWNTREND STRONG/OK. White: else.">Pivot State</th>
+      <th class="tip gend" style="min-width:64px" onclick="sb('q5_p')"
+          data-tip="EXTENSION&#10;&#10;WHAT&#10;Q5 Price score — how stretched price is above (positive) or below (negative) the ticker's normal range.&#10;&#10;HOW TO USE&#10;Positive = stretched high (trim caution).&#10;Near zero = normal.&#10;Negative = oversold (potentially opportunity).&#10;Values ≥ +0.5 flag red. Opposite intuition from other Qs — high Q5 is a CAUTION, not strength.&#10;&#10;HOW CONSTRUCTED&#10;Average of 4 matrix pairs: price_z × range_pos, price_z × rel_vol (distribution), range_pos × pct_to_ph, price_d5_z × stretch_roc.&#10;&#10;RANGE: -1.00 to +1.00.">Extension</th>
+      <th class="gsep tip gend" style="min-width:220px"
+          data-tip="FLAGS&#10;&#10;WHAT&#10;Descriptive phrases for matrix intersections this ticker matches. Each phrase is a fact-derived combination of other columns on the dashboard.&#10;&#10;PHRASES:&#10;&#10;  stretched uptrend — Pivot UPTREND + Extension ≥ +0.3&#10;  oversold uptrend — Pivot UPTREND + Extension ≤ -0.3&#10;  stretched turn — Pivot TURN state + Extension ≥ +0.3&#10;    (TURN = UPTREND_FAIL, TOP_FORMING, BOTTOM_FORMING, DOWNTREND_FAIL)&#10;  oversold turn — Pivot TURN state + Extension ≤ -0.3&#10;  trend > mom — T.Rank top quartile AND M.Rank mid/bot&#10;  mom > trend — M.Rank top quartile AND T.Rank mid/bot&#10;  speed + volume — Vel.Rank top quartile AND Vol.Rank top quartile&#10;  speed − volume — Vel.Rank top quartile AND Vol.Rank bottom quartile&#10;&#10;HOW TO USE&#10;Empty = no flags. Ticker is in a normal state on all dimensions.&#10;One phrase = single-dimension signal.&#10;Two or more phrases = multi-dimensional convergence. High-signal tickers.&#10;&#10;Phrases combine — e.g. 'stretched uptrend, mom > trend, speed − volume' reads as: uptrend stretched + momentum leading trend + velocity without volume support. Three converging signals.&#10;&#10;Use the Flags filter dropdown to show only tickers matching a specific phrase.&#10;&#10;HOW CONSTRUCTED&#10;Computed per ticker from the current filtered universe. Quartile boundaries recompute based on visible tickers (watchlist / group / search filters).">Flags</th>
+
+      <th class="gsep tip" style="min-width:54px" onclick="sb('perf_1d')"
+          data-tip="1D%&#10;&#10;WHAT&#10;Today's percent return from yesterday's close.&#10;&#10;HOW TO USE&#10;Raw price action. A top-ranked ticker down -3% today may be starting to crack. A weak ticker up +4% is getting a bounce.&#10;&#10;HOW CONSTRUCTED&#10;(today_close - yesterday_close) / yesterday_close × 100.&#10;&#10;COLOUR&#10;Green positive, red negative.">1D%</th>
+      <th class="tip" style="min-width:54px" onclick="sb('perf_5d')"
+          data-tip="5D%&#10;&#10;WHAT&#10;Cumulative percent return over the last 5 trading bars.&#10;&#10;HOW TO USE&#10;Weekly price action. Combined with 1D%: big 5D% gain + negative 1D% = extended pullback after a run.&#10;&#10;HOW CONSTRUCTED&#10;(close - close_5_bars_ago) / close_5_bars_ago × 100.&#10;&#10;COLOUR&#10;Green positive, red negative.">5D%</th>
+    </tr>
+  </thead>
+  <tbody id="tb"><tr><td colspan="14" class="msg">Loading…</td></tr></tbody>
+</table></div>
+
+<script>
+const SURL='https://pzskvslhfaituzyukasl.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB6c2t2c2xoZmFpdHV6eXVrYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwNzQyNTAsImV4cCI6MjA3OTY1MDI1MH0.FEZTIIQ4zgdb7uswf70XZI9Ph6ykSeDkfxooIcRIOMw';
+const H={'apikey':KEY,'Authorization':'Bearer '+KEY};
+
+const RAW_COLS='symbol,name,group_name,watchlist,trend,momentum,perf_1d,perf_5d';
+const FACT_COLS='symbol,rank_alignment,fact_rank_move,q1_rank,q2_rank,q3_rank,q4_rank,q5_p,structure_3p,p01_state';
+
+let all=[],filt=[],sc='rank_alignment',sd=1,wl='UK ETFS',grp='',flag='',pivot='',tm='';
+let maxRank=0, maxTR=0, maxMR=0, maxVelR=0, maxVolR=0;
+
+async function load(){
+  const tb=document.getElementById('tb');
+  try{
+    const [rawRes,factRes]=await Promise.all([
+      fetch(`${SURL}/rest/v1/r_universe_live?select=${RAW_COLS}&limit=400`,{headers:H}),
+      fetch(`${SURL}/rest/v1/v_fact_consensus_v2?select=${FACT_COLS}&limit=400`,{headers:H})
+    ]);
+    if(!rawRes.ok)throw new Error('raw: '+rawRes.status);
+    if(!factRes.ok)throw new Error('fact: '+factRes.status);
+    const rawData=await rawRes.json();
+    const factData=await factRes.json();
+    const factMap={};
+    factData.forEach(f=>{factMap[f.symbol]=f;});
+    all=rawData.map(r=>Object.assign({},r,factMap[r.symbol]||{}));
+    buildGroups();af();
+  }catch(e){
+    tb.innerHTML=`<tr><td colspan="14" class="msg">Error — ${e.message}</td></tr>`;
+  }
+}
+
+function setWL(w){wl=w;buildGroups();af();}
+function setGrp(g){grp=g;af();}
+function setFlag(f){flag=f;if(f){scan='';document.getElementById('ssel').value='';}af();}
+function setPivot(p){pivot=p;if(p){scan='';document.getElementById('ssel').value='';}af();}
+function setTM(t){tm=t;if(t){scan='';document.getElementById('ssel').value='';}af();}
+
+// Scan presets — each sets a combination of underlying filters
+// scan is a second filter applied AFTER the dropdown filters
+let scan='';
+function setScan(s){
+  scan=s;
+  // Reset the individual filters when a scan is picked, so user can see
+  // the filter state cleanly. Scan itself does the compound filtering.
+  if(s){
+    document.getElementById('psel').value='';pivot='';
+    document.getElementById('tmsel').value='';tm='';
+    document.getElementById('fsel').value='';flag='';
+  }
+  af();
+}
+
+// Check if a ticker matches the current scan (returns true if no scan set)
+function matchesScan(r){
+  if(!scan)return true;
+  const pv=r.structure_3p;
+  const tx=r.p01_state;
+  const isUp=pv==='UPTREND_STRONG'||pv==='UPTREND_OK';
+  const isBull=tx==='BULL_ACCEL'||tx==='BULL_ESTAB';
+  const hasFlag=(f)=>r._flags&&r._flags.includes(f);
+
+  switch(scan){
+    case 'clean_uptrend':
+      return isUp && !hasFlag('stretched uptrend') && !hasFlag('oversold uptrend');
+    case 'uptrend_oversold':
+      return hasFlag('oversold uptrend');
+    case 'uptrend_stretched':
+      return hasFlag('stretched uptrend');
+    case 'bottom_bull':
+      return pv==='BOTTOM_FORMING' && isBull;
+    case 'range_emerging':
+      return pv==='RANGE' && hasFlag('mom > trend') && tx==='BULL_ACCEL';
+    case 'structure_cracked':
+      return pv==='UPTREND_FAIL' || pv==='TOP_FORMING';
+    case 'conviction':
+      return hasFlag('speed + volume');
+    case 'fading':
+      return hasFlag('trend > mom') && isUp;
+    default:
+      return true;
+  }
+}
+
+function titleCase(s){
+  if(!s)return s;
+  return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+}
+
+function buildGroups(){
+  const b=wl?all.filter(r=>r.watchlist===wl||r.watchlist==='BOTH'):all;
+  const gs=[...new Set(b.map(r=>r.group_name).filter(Boolean))].sort();
+  const sel=document.getElementById('gsel');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">All Groups</option>'+gs.map(g=>`<option value="${g}"${g===cur?' selected':''}>${titleCase(g)}</option>`).join('');
+  if(!gs.includes(grp)){sel.value='';grp='';}
+}
+
+function qBand(v,max){
+  if(v==null||isNaN(v)||max<4)return 'M';
+  if(v<=max*0.25)return 'T';
+  if(v>max*0.75)return 'B';
+  return 'M';
+}
+
+function computeFlags(r){
+  const flags=[];
+  const ext=parseFloat(r.q5_p);
+  const pv=r.structure_3p;
+  const isUp=pv==='UPTREND_STRONG'||pv==='UPTREND_OK';
+  const isTurn=pv==='UPTREND_FAIL'||pv==='TOP_FORMING'||pv==='BOTTOM_FORMING'||pv==='DOWNTREND_FAIL';
+  if(!isNaN(ext)){
+    if(isUp&&ext>=0.3)flags.push('stretched uptrend');
+    if(isUp&&ext<=-0.3)flags.push('oversold uptrend');
+    if(isTurn&&ext>=0.3)flags.push('stretched turn');
+    if(isTurn&&ext<=-0.3)flags.push('oversold turn');
+  }
+  const tQ=qBand(r.q1_rank,maxTR);
+  const mQ=qBand(r.q2_rank,maxMR);
+  const velQ=qBand(r.q3_rank,maxVelR);
+  const volQ=qBand(r.q4_rank,maxVolR);
+  if((tQ==='T'&&mQ!=='T')||(tQ==='M'&&mQ==='B'))flags.push('trend > mom');
+  if((mQ==='T'&&tQ!=='T')||(mQ==='M'&&tQ==='B'))flags.push('mom > trend');
+  if(velQ==='T'&&volQ==='T')flags.push('speed + volume');
+  if(velQ==='T'&&volQ==='B')flags.push('speed − volume');
+  return flags;
+}
+
+function base(){
+  return all.filter(r=>{
+    if(wl&&r.watchlist!==wl&&r.watchlist!=='BOTH')return false;
+    if(grp&&r.group_name!==grp)return false;
+    if(pivot&&r.structure_3p!==pivot)return false;
+    if(tm&&r.p01_state!==tm)return false;
+    if(r.rank_alignment==null)return false;
+    return true;
+  });
+}
+
+function af(){
+  const s=document.getElementById('sr').value.toLowerCase();
+  // Universe for quartile computation: full watchlist, ignoring all other filters.
+  // This keeps sub-rank colours and flags consistent regardless of search/group/etc.
+  const universe=all.filter(r=>(wl&&(r.watchlist===wl||r.watchlist==='BOTH'))&&r.rank_alignment!=null);
+  maxRank=Math.max(...universe.map(r=>r.rank_alignment||0));
+  maxTR=Math.max(...universe.map(r=>r.q1_rank||0));
+  maxMR=Math.max(...universe.map(r=>r.q2_rank||0));
+  maxVelR=Math.max(...universe.map(r=>r.q3_rank||0));
+  maxVolR=Math.max(...universe.map(r=>r.q4_rank||0));
+  // Compute flags for the entire universe, using universe quartiles — so flags
+  // are stable when filters change. Each ticker's _flags reflects its position
+  // across the whole watchlist.
+  universe.forEach(r=>{r._flags=computeFlags(r);});
+  let b=base().filter(r=>{
+    if(s&&!(r.symbol||'').toLowerCase().includes(s)&&!(r.name||'').toLowerCase().includes(s)&&!(r.group_name||'').toLowerCase().includes(s))return false;
+    return true;
+  });
+  if(flag){
+    if(flag==='MULTI'){
+      b=b.filter(r=>r._flags.length>=2);
+    }else{
+      b=b.filter(r=>r._flags.includes(flag));
+    }
+  }
+  if(scan){
+    b=b.filter(r=>matchesScan(r));
+  }
+  filt=b;
+  sort();render();
+}
+
+function sb(c){
+  if(sc===c)sd*=-1;else{sc=c;sd=c.startsWith('rank_')||c.endsWith('_rank')||c==='fact_rank_move'?1:-1;}
+  document.querySelectorAll('tr.ch th').forEach(t=>t.classList.remove('s'));
+  event?.target?.classList.add('s');
+  sort();render();
+}
+
+function sort(){
+  filt.sort((a,b)=>{
+    let av=a[sc],bv=b[sc];
+    if(av==null)av=sd>0?Infinity:-Infinity;
+    if(bv==null)bv=sd>0?Infinity:-Infinity;
+    if(typeof av==='string')return av.localeCompare(bv)*sd;
+    return(av-bv)*sd;
+  });
+}
+
+const num=(v,d=0)=>(v==null||isNaN(v))?'<span class="cdim">—</span>':parseFloat(v).toFixed(d);
+const numSigned=(v,d=0)=>{
+  if(v==null||isNaN(v))return'<span class="cdim">—</span>';
+  const f=parseFloat(v);
+  const col=f>0?'#00e676':f<0?'#ff1744':'#fff';
+  return`<span style="color:${col}">${f.toFixed(d)}</span>`;
+};
+const pct=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);return`<span class="${f>0?'cg':f<0?'cr':'cw'}">${f>=0?'+':''}${f.toFixed(2)}%</span>`;};
+const rmv=v=>{if(v==null||v===''||v===undefined)return'<span class="cdim">—</span>';const i=parseInt(v);if(isNaN(i)||i===0)return'<span class="cdim">—</span>';return`<span style="color:${i>0?'#00e676':'#ff1744'}">${i>0?'+':''}${i}</span>`;};
+
+const rankCell=v=>{
+  if(v==null||isNaN(v))return'<span class="cdim">—</span>';
+  const r=parseInt(v);
+  if(maxRank<4)return`<span style="color:#fff;font-weight:600">${r}</span>`;
+  let col='#fff';
+  if(r<=Math.ceil(maxRank*0.25))col='#00e676';
+  else if(r>Math.floor(maxRank*0.75))col='#ff1744';
+  return`<span style="color:${col};font-weight:600">${r}</span>`;
+};
+const subRank=(v,max)=>{
+  if(v==null||isNaN(v))return'<span class="cdim">—</span>';
+  const r=parseInt(v);
+  if(!max||max<4)return`<span class="cw">${r}</span>`;
+  let col='#fff';
+  if(r<=Math.ceil(max*0.25))col='#00e676';
+  else if(r>Math.floor(max*0.75))col='#ff1744';
+  return`<span style="color:${col}">${r}</span>`;
+};
+const extCell=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);const col=f>=0.5?'#ff1744':'#fff';return`<span style="color:${col}">${f>=0?'+':''}${f.toFixed(2)}</span>`;};
+
+const STRUCT_DISPLAY={
+  'UPTREND_STRONG':   {label:'UPTREND STRONG',   col:'#00e676'},
+  'UPTREND_OK':       {label:'UPTREND OK',       col:'#00e676'},
+  'UPTREND_FAIL':     {label:'UPTREND FAIL',     col:'#fff'},
+  'DOWNTREND_STRONG': {label:'DOWNTREND STRONG', col:'#ff1744'},
+  'DOWNTREND_OK':     {label:'DOWNTREND OK',     col:'#ff1744'},
+  'DOWNTREND_FAIL':   {label:'DOWNTREND FAIL',   col:'#fff'},
+  'TOP_FORMING':      {label:'TOP FORMING',      col:'#fff'},
+  'BOTTOM_FORMING':   {label:'BOTTOM FORMING',   col:'#fff'},
+  'RANGE':            {label:'RANGE',            col:'#fff'},
+  'INSUFFICIENT':     {label:'—',                col:'rgba(255,255,255,0.35)'}
+};
+const pivotCell=s=>{
+  if(s==null||s==='')return'<span class="cdim">—</span>';
+  const d=STRUCT_DISPLAY[s]||{label:s,col:'#fff'};
+  return`<span style="color:${d.col}" title="${s}">${d.label}</span>`;
+};
+
+const flagsCell=flags=>{
+  if(!flags||!flags.length)return'<span class="cdim">—</span>';
+  return`<span style="color:rgba(255,255,255,0.75);font-size:11px">${flags.join(', ')}</span>`;
+};
+
+function render(){
+  const tb=document.getElementById('tb');
+  if(!filt.length){tb.innerHTML='<tr><td colspan="14" class="msg">No results</td></tr>';return;}
+  tb.innerHTML=filt.map(r=>{
+    return`<tr>`+
+      `<td title="${(r.name||'').replace(/"/g,'&quot;')}"><span style="color:#fff;font-weight:600">${r.symbol}</span></td>`+
+      `<td><span style="color:rgba(255,255,255,0.6);max-width:100px;overflow:hidden;text-overflow:ellipsis;display:block;white-space:nowrap;font-size:11px">${r.group_name||''}</span></td>`+
+      `<td class="gsep-lg">${rankCell(r.rank_alignment)}</td>`+
+      `<td class="gend">${rmv(r.fact_rank_move)}</td>`+
+      `<td class="gsep">${numSigned(r.trend)}</td>`+
+      `<td class="gend">${numSigned(r.momentum)}</td>`+
+      `<td class="gsep">${subRank(r.q1_rank,maxTR)}</td>`+
+      `<td>${subRank(r.q2_rank,maxMR)}</td>`+
+      `<td>${subRank(r.q3_rank,maxVelR)}</td>`+
+      `<td class="gend">${subRank(r.q4_rank,maxVolR)}</td>`+
+      `<td class="gsep">${pivotCell(r.structure_3p)}</td>`+
+      `<td class="gend">${extCell(r.q5_p)}</td>`+
+      `<td class="gsep gend">${flagsCell(r._flags)}</td>`+
+      `<td class="gsep">${pct(r.perf_1d)}</td>`+
+      `<td>${pct(r.perf_5d)}</td>`+
+    `</tr>`;
+  }).join('');
+}
+
+load();
+setInterval(load,3*60*1000);
+
+async function openSpec(){
+  document.getElementById('specOverlay').classList.add('on');
+  const body=document.getElementById('specBody');
+  const head=document.getElementById('specHead');
+  body.textContent='Loading spec…';
+  head.textContent='loading...';
+  try{
+    const res=await fetch(`${SURL}/rest/v1/spec_2h_sections?select=section_order,section_title,content,updated_at&order=section_order.asc`,{headers:H});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const sections=await res.json();
+    if(!sections.length){body.textContent='Spec table exists but is empty.';head.textContent='empty';return;}
+    const latest=sections.reduce((a,s)=>{const d=new Date(s.updated_at);return d>a?d:a;},new Date(0));
+    body.textContent=sections.map(s=>{
+      const underline='='.repeat(s.section_title.length);
+      return`${s.section_order}. ${s.section_title}\n${underline}\n${s.content.trim()}\n`;
+    }).join('\n\n');
+    head.textContent=`${sections.length} sections · updated ${latest.toISOString().slice(0,10)}`;
+  }catch(e){
+    body.textContent=`Error loading spec: ${e.message}`;
+    head.textContent='error';
+  }
+}
+
+function closeSpec(){
+  document.getElementById('specOverlay').classList.remove('on');
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeSpec();
+});
+</script>
+
+<div class="spec-overlay" id="specOverlay" onclick="if(event.target===this)closeSpec()">
+  <div class="spec-modal">
+    <div class="spec-head">
+      <span class="t">2H SPEC</span>
+      <span class="m" id="specHead">—</span>
+      <span class="x" onclick="closeSpec()" title="Close (Esc)">×</span>
+    </div>
+    <div class="spec-body" id="specBody">Loading…</div>
+  </div>
+</div>
+
+</body></html>
