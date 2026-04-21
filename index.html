@@ -110,8 +110,8 @@ tr.rbl>td:first-child{background:#13151a}</style></head><body>
       <!-- STRUCTURE: Q6, Struct, Dist PH, Dist PL -->
       <th class="gsep tip" style="min-width:54px" onclick="sb('q6_s')"
           data-tip="Q6 STRUCTURE — Geometric bullishness: 3-pivot structure classification, breakout/breakdown status, and support/resistance position.&#10;&#10;RANGE: -1.00 to +1.00.&#10;Positive = bullish geometry (UPTREND + breakouts, PH pulling away).&#10;Negative = bearish geometry (DOWNTREND + breakdowns, support lost).&#10;&#10;BUILT FROM 6 matrix pairs (all using 3-pivot structure):&#10;  P09 structure_3p × rel_vol (confirmation)&#10;  P10 structure_3p × pct_to_ph (HARNESS EARNED)&#10;  P11 structure_3p × pct_to_pl (support context)&#10;  P14 pct_to_ph × pct_to_pl (full S/R map)&#10;  P17 range_pos × pct_to_ph (range geometry)&#10;  P33 pct_to_ph × ph_roc (PH trajectory)&#10;&#10;Q6 = average of 6 pair contributions.&#10;&#10;STRUCTURE STATES used by P09/P10/P11:&#10;  Bullish progression: UPTREND_STRONG/OK (pos), UPTREND_FAIL (neutral)&#10;  Bearish progression: DOWNTREND_STRONG/OK (neg), DOWNTREND_FAIL (neutral)&#10;  Transitions: TOP_FORMING (slightly neg), BOTTOM_FORMING (slightly pos)&#10;  RANGE: 0 contribution — range-bound tickers no longer boost Q6 falsely&#10;&#10;Compare to Q1 Trend: Q6 measures structural geometry; Q1 measures multi-method trend composite.">Q6 Struct</th>
-      <th class="tip" style="min-width:60px" onclick="sb('structure_3p')"
-          data-tip="STRUCT — 3-pivot structure classification.&#10;&#10;WHAT: Geometric pattern across most recent 3 pivot highs and 3 pivot lows. Richer than 2-pivot — captures trend strength, weakness, and transitions.&#10;&#10;STATES:&#10;  ↑↑↑ UPTREND_STRONG — 3 HHs + 3 HLs (staircase up)&#10;  ↑↑ UPTREND_OK — clear uptrend, one wavering sequence&#10;  ↑? UPTREND_FAIL — recent high failed to make new HH (weakness)&#10;  ⤵ TOP_FORMING — highs rolling over (potential reversal)&#10;  ▬▬ RANGE — oscillating, no progression (chop)&#10;  ⤴ BOTTOM_FORMING — lows rising (potential base)&#10;  ↓? DOWNTREND_FAIL — recent low failed to make new LL (strength emerging)&#10;  ↓↓ DOWNTREND_OK — clear downtrend, one wavering sequence&#10;  ↓↓↓ DOWNTREND_STRONG — 3 LLs + 3 LHs&#10;  — INSUFFICIENT — fewer than 3 confirmed pivots&#10;&#10;BUILT FROM: 10-bar-confirmed fractal pivots from two_h_readings (daily). Most recent pivot is ~10+ days old by design — structure is a slow signal.&#10;&#10;COLOUR: Green = bullish progression. Yellow = warning/transition. Orange = topping. Red = bearish. Light blue = bottoming. Grey = range.&#10;&#10;WEIGHT: Bold = within 2% of pivot high (decision zone).&#10;&#10;EXAMPLE: ↑↑↑ means structure says uptrend confirmed across 3 pivots both sides.&#10;▬▬ means the ticker is oscillating — be wary of trading as if it's trending.&#10;&#10;Hover shows the underlying state name.&#10;&#10;Feeds Q6 (structure) and Q1 (via P10 HARNESS EARNED).">Struct</th>
+      <th class="tip" style="min-width:130px" onclick="sb('structure_3p')"
+          data-tip="STRUCT — 3-pivot structure classification.&#10;&#10;WHAT: Geometric pattern across most recent 3 pivot highs and 3 pivot lows.&#10;&#10;STATES:&#10;  UPTREND STRONG — 3 HHs + 3 HLs (staircase up)&#10;  UPTREND OK — clear uptrend, one wavering sequence&#10;  UPTREND FAIL — rising highs but first meaningful lower low (crack)&#10;  TOP FORMING — highs rolling over (potential reversal)&#10;  RANGE — oscillating, no progression&#10;  BOTTOM FORMING — lows rising (potential base)&#10;  DOWNTREND FAIL — falling highs but latest low holding (strength emerging)&#10;  DOWNTREND OK — clear downtrend, one wavering sequence&#10;  DOWNTREND STRONG — 3 LLs + 3 LHs&#10;  — INSUFFICIENT — fewer than 3 confirmed pivots&#10;&#10;BUILT FROM: 10-bar-confirmed fractal pivots from two_h_readings (daily). Most recent pivot is ~10+ days old by design — structure is a slow signal. 1.5% magnitude threshold filters sub-noise breaks.&#10;&#10;COLOUR: Green = UPTREND STRONG/OK. Red = DOWNTREND STRONG/OK. White = everything else (label carries the meaning).&#10;&#10;WEIGHT: Bold = within 2% of pivot high (decision zone).&#10;&#10;Feeds Q6 (structure) and Q1 (via P10 HARNESS EARNED).">Struct</th>
       <th class="tip" style="min-width:54px" onclick="sb('pct_to_ph')"
           data-tip="DIST PH — Distance to last Pivot High.&#10;&#10;WHAT: Percent distance from current price to the most recent pivot high.&#10;&#10;RANGE: Typically -10% to +20%.&#10;Negative = price broken ABOVE last PH (breakout).&#10;Zero zone (±2%) = testing the PH.&#10;Positive = price below last PH (room above).&#10;&#10;COLOUR:&#10;  Green: ≤ -2% (fresh breakout — HARNESS EARNED signal)&#10;  Bold white: |value| < 2% (decision zone)&#10;  White: otherwise&#10;&#10;BUILT FROM: (close − last_ph) / last_ph × 100.&#10;&#10;PHASE B HARNESS: Breakouts < -2% showed +1.7% to +4.7% forward returns at 20 days with 60-71% win rates. Strongest single signal in system.&#10;&#10;Feeds Q1 and Q6 via multiple pairs.">Dist PH</th>
       <th class="tip" style="min-width:54px" onclick="sb('pct_to_pl')"
@@ -207,22 +207,18 @@ const num=(v,d=1)=>(v==null||isNaN(v))?'<span class="cdim">—</span>':parseFloa
 const pct=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);return`<span class="${f>0?'cg':f<0?'cr':'cw'}">${f>=0?'+':''}${f.toFixed(2)}%</span>`;};
 const relvol=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);if(f>=1.3)return`<span style="color:#fff;font-weight:700">${f.toFixed(2)}×</span>`;return`<span class="cw">${f.toFixed(2)}×</span>`;};
 const volroc=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);return`<span class="cw">${f>=0?'+':''}${f.toFixed(2)}</span>`;};
-// 3-pivot structure display with glyphs
-// UPTREND_STRONG = ↑↑↑, UPTREND_OK = ↑↑, UPTREND_FAIL = ↑?
-// DOWNTREND_STRONG = ↓↓↓, DOWNTREND_OK = ↓↓, DOWNTREND_FAIL = ↓?
-// TOP_FORMING = ⤵ (bearish turn), BOTTOM_FORMING = ⤴ (bullish turn)
-// RANGE = ▬▬ (neutral)
+// 3-pivot structure display — text labels (v3 April 2026)
 const STRUCT_DISPLAY={
-  'UPTREND_STRONG':   {glyph:'↑↑↑', col:'#00e676'},
-  'UPTREND_OK':       {glyph:'↑↑',  col:'#00e676'},
-  'UPTREND_FAIL':     {glyph:'↑?',  col:'#ffeb3b'},
-  'DOWNTREND_STRONG': {glyph:'↓↓↓', col:'#ff1744'},
-  'DOWNTREND_OK':     {glyph:'↓↓',  col:'#ff1744'},
-  'DOWNTREND_FAIL':   {glyph:'↓?',  col:'#ffeb3b'},
-  'TOP_FORMING':      {glyph:'⤵',  col:'#ff9100'},
-  'BOTTOM_FORMING':   {glyph:'⤴',  col:'#80d8ff'},
-  'RANGE':            {glyph:'▬▬',  col:'rgba(255,255,255,0.5)'},
-  'INSUFFICIENT':     {glyph:'—',   col:'rgba(255,255,255,0.35)'}
+  'UPTREND_STRONG':   {glyph:'UPTREND STRONG',   col:'#00e676'},
+  'UPTREND_OK':       {glyph:'UPTREND OK',       col:'#00e676'},
+  'UPTREND_FAIL':     {glyph:'UPTREND FAIL',     col:'#fff'},
+  'DOWNTREND_STRONG': {glyph:'DOWNTREND STRONG', col:'#ff1744'},
+  'DOWNTREND_OK':     {glyph:'DOWNTREND OK',     col:'#ff1744'},
+  'DOWNTREND_FAIL':   {glyph:'DOWNTREND FAIL',   col:'#fff'},
+  'TOP_FORMING':      {glyph:'TOP FORMING',      col:'#fff'},
+  'BOTTOM_FORMING':   {glyph:'BOTTOM FORMING',   col:'#fff'},
+  'RANGE':            {glyph:'RANGE',            col:'#fff'},
+  'INSUFFICIENT':     {glyph:'—',                col:'rgba(255,255,255,0.35)'}
 };
 
 const struct=(s3,pct_ph)=>{
