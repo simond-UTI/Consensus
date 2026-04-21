@@ -72,7 +72,7 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
   <thead>
     <tr class="gh">
       <th class="blank" colspan="2"></th>
-      <th colspan="2" class="gsep-lg gend">Position</th>
+      <th colspan="3" class="gsep-lg gend">Position</th>
       <th colspan="2" class="gsep gend">Raw Signals</th>
       <th colspan="4" class="gsep gend">Direction</th>
       <th colspan="2" class="gsep gend">State</th>
@@ -85,8 +85,10 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
 
       <th class="gsep-lg tip" style="min-width:54px" onclick="sb('rank_alignment')"
           data-tip="RANK&#10;&#10;WHAT&#10;Your primary anchor — position in the universe by net Q-score (all 7 Q-scores combined).&#10;&#10;HOW TO USE&#10;Top quartile (green) is leadership. Bottom quartile (red) is broken down. Middle (white) is mid-pack. Sort by this to order the universe by overall strength. Sub-ranks in Direction section tell you which dimensions drive the rank.&#10;&#10;HOW CONSTRUCTED&#10;DENSE_RANK() over net_score (Q1+Q2+Q3+Q4+Q5+Q6+Q7) within each watchlist.&#10;&#10;COLOUR&#10;Green: top 25%. Red: bottom 25%. White: middle half.">Rank</th>
-      <th class="tip gend" style="min-width:48px" onclick="sb('fact_rank_move')"
+      <th class="tip" style="min-width:48px" onclick="sb('fact_rank_move')"
           data-tip="R MV&#10;&#10;WHAT&#10;Rank positions this ticker has moved since yesterday.&#10;&#10;HOW TO USE&#10;Big movers (|R Mv| > 20) signal change. Positive = climbing toward rank 1. Negative = falling.&#10;&#10;HOW CONSTRUCTED&#10;Yesterday's rank_alignment minus today's. Requires ≥ 2 days of snapshot data.&#10;&#10;CURRENT STATE&#10;Snapshot capture active since 20 Apr 2026. Will populate meaningfully once ~3 days of history accumulate.">R Mv</th>
+      <th class="tip gend" style="min-width:130px" onclick="sb('profile')"
+          data-tip="PROFILE&#10;&#10;WHAT&#10;Taxonomy classifying ticker by rank position + structural state. Adds context that raw rank alone cannot — a rank 117 can be &quot;broken&quot; or &quot;setup&quot; depending on structure.&#10;&#10;CATEGORIES:&#10;  LEADER ACCEL — top rank + accelerating (current leader)&#10;  LEADER EXTENDED — top rank + stretched (late-stage leader)&#10;  LEADER NARROW — top rank, narrower breadth&#10;  MID — middle-pack, no distinctive signal&#10;  SETUP CLEAN — non-leader but structurally clean (emerging candidate)&#10;  SETUP BROAD — non-leader with broader bullish signals&#10;  SETUP RECOVERY — weak but accelerating (potential turn)&#10;  WEAK — weak and declining&#10;&#10;HOW TO USE&#10;Low rank with SETUP CLEAN ≠ low rank with WEAK. Profile disambiguates.&#10;&#10;HOW CONSTRUCTED&#10;Derived from rank_alignment quintile + strength quintile + alignment quintile + q5 quintile + structure state. See spec section 15.">Profile</th>
 
       <th class="gsep tip" style="min-width:52px" onclick="sb('trend')"
           data-tip="TREND&#10;&#10;WHAT&#10;Raw 63-bar trend composite — the long-horizon directional score.&#10;&#10;HOW TO USE&#10;80+ is monster. 50-80 solid. 20-50 mid. Below 0 = long-horizon down.&#10;Compare vs Mom: Trend > Mom = trend established. Mom > Trend = momentum leading (early-stage or fresh breakout).&#10;&#10;HOW CONSTRUCTED&#10;Pine Script 63-bar methodology, from r_universe_live.trend.&#10;&#10;RANGE: -100 to +100.">Trend</th>
@@ -115,7 +117,7 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
           data-tip="5D%&#10;&#10;WHAT&#10;Cumulative percent return over the last 5 trading bars.&#10;&#10;HOW TO USE&#10;Weekly price action. Combined with 1D%: big 5D% gain + negative 1D% = extended pullback after a run.&#10;&#10;HOW CONSTRUCTED&#10;(close - close_5_bars_ago) / close_5_bars_ago × 100.&#10;&#10;COLOUR&#10;Green positive, red negative.">5D%</th>
     </tr>
   </thead>
-  <tbody id="tb"><tr><td colspan="14" class="msg">Loading…</td></tr></tbody>
+  <tbody id="tb"><tr><td colspan="15" class="msg">Loading…</td></tr></tbody>
 </table></div>
 
 <script>
@@ -124,7 +126,7 @@ const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
 const H={'apikey':KEY,'Authorization':'Bearer '+KEY};
 
 const RAW_COLS='symbol,name,group_name,watchlist,trend,momentum,perf_1d,perf_5d';
-const FACT_COLS='symbol,rank_alignment,fact_rank_move,q1_rank,q2_rank,q3_rank,q4_rank,q5_p,structure_3p,p01_state';
+const FACT_COLS='symbol,rank_alignment,fact_rank_move,q1_rank,q2_rank,q3_rank,q4_rank,q5_p,structure_3p,p01_state,profile';
 
 let all=[],filt=[],sc='rank_alignment',sd=1,wl='UK ETFS',grp='',flag='',pivot='',tm='';
 let maxRank=0, maxTR=0, maxMR=0, maxVelR=0, maxVolR=0;
@@ -145,7 +147,7 @@ async function load(){
     all=rawData.map(r=>Object.assign({},r,factMap[r.symbol]||{}));
     buildGroups();af();
   }catch(e){
-    tb.innerHTML=`<tr><td colspan="14" class="msg">Error — ${e.message}</td></tr>`;
+    tb.innerHTML=`<tr><td colspan="15" class="msg">Error — ${e.message}</td></tr>`;
   }
 }
 
@@ -335,6 +337,22 @@ const subRank=(v,max)=>{
 };
 const extCell=v=>{if(v==null||isNaN(v))return'<span class="cdim">—</span>';const f=parseFloat(v);const col=f>=0.5?'#ff1744':'#fff';return`<span style="color:${col}">${f>=0?'+':''}${f.toFixed(2)}</span>`;};
 
+const PROF_DISPLAY={
+  '4_LEADER_ACCEL':       {label:'LEADER ACCEL',    col:'#00e676'},
+  '5_LEADER_EXTENDED':    {label:'LEADER EXTENDED', col:'#fff'},
+  '6_NARROW_LEADER':      {label:'LEADER NARROW',   col:'#fff'},
+  '2_NONLEADER_ACCEL':    {label:'SETUP CLEAN',     col:'#00e676'},
+  '3_BROAD_MIDSTRENGTH':  {label:'SETUP BROAD',     col:'#fff'},
+  '1_WEAK_ACCEL':         {label:'SETUP RECOVERY',  col:'#fff'},
+  '7_WEAK_DECLINING':     {label:'WEAK',            col:'#ff1744'},
+  '0_MID':                {label:'MID',             col:'#fff'}
+};
+const profileCell=v=>{
+  if(!v)return'<span class="cdim">—</span>';
+  const p=PROF_DISPLAY[v]||{label:v,col:'rgba(255,255,255,0.6)'};
+  return`<span style="font-size:10px;font-weight:600;letter-spacing:0.02em;color:${p.col}">${p.label}</span>`;
+};
+
 const STRUCT_DISPLAY={
   'UPTREND_STRONG':   {label:'UPTREND STRONG',   col:'#00e676'},
   'UPTREND_OK':       {label:'UPTREND OK',       col:'#00e676'},
@@ -360,13 +378,14 @@ const flagsCell=flags=>{
 
 function render(){
   const tb=document.getElementById('tb');
-  if(!filt.length){tb.innerHTML='<tr><td colspan="14" class="msg">No results</td></tr>';return;}
+  if(!filt.length){tb.innerHTML='<tr><td colspan="15" class="msg">No results</td></tr>';return;}
   tb.innerHTML=filt.map(r=>{
     return`<tr>`+
       `<td title="${(r.name||'').replace(/"/g,'&quot;')}"><span style="color:#fff;font-weight:600">${r.symbol}</span></td>`+
       `<td><span style="color:rgba(255,255,255,0.6);max-width:100px;overflow:hidden;text-overflow:ellipsis;display:block;white-space:nowrap;font-size:11px">${r.group_name||''}</span></td>`+
       `<td class="gsep-lg">${rankCell(r.rank_alignment)}</td>`+
-      `<td class="gend">${rmv(r.fact_rank_move)}</td>`+
+      `<td>${rmv(r.fact_rank_move)}</td>`+
+      `<td class="gend">${profileCell(r.profile)}</td>`+
       `<td class="gsep">${numSigned(r.trend)}</td>`+
       `<td class="gend">${numSigned(r.momentum)}</td>`+
       `<td class="gsep">${subRank(r.q1_rank,maxTR)}</td>`+
