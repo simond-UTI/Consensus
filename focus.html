@@ -364,7 +364,7 @@ const PROF_DISPLAY={
 const profileCell=v=>{
   if(!v)return'<span class="cdim">—</span>';
   const p=PROF_DISPLAY[v]||{label:v,col:'rgba(255,255,255,0.6)'};
-  return`<span style="font-size:10px;font-weight:600;letter-spacing:0.02em;color:${p.col}">${p.label}</span>`;
+  return`<span style="color:${p.col}">${p.label}</span>`;
 };
 
 const STRUCT_DISPLAY={
