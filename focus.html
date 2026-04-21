@@ -32,6 +32,17 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
   <select id="gsel" onchange="setGrp(this.value)">
     <option value="">All Groups</option>
   </select>
+  <select id="profsel" onchange="setProfile(this.value)">
+    <option value="">All Profiles</option>
+    <option value="4_LEADER_ACCEL">Leader Accel</option>
+    <option value="5_LEADER_EXTENDED">Leader Extended</option>
+    <option value="6_NARROW_LEADER">Leader Narrow</option>
+    <option value="0_MID">Mid</option>
+    <option value="2_NONLEADER_ACCEL">Setup Emerging</option>
+    <option value="3_BROAD_MIDSTRENGTH">Setup Broad</option>
+    <option value="1_WEAK_ACCEL">Setup Recovery</option>
+    <option value="7_WEAK_DECLINING">Weak Declining</option>
+  </select>
   <select id="psel" onchange="setPivot(this.value)">
     <option value="">All Pivots</option>
     <option value="UPTREND_STRONG">Uptrend Strong</option>
@@ -88,7 +99,7 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
       <th class="tip" style="min-width:48px" onclick="sb('fact_rank_move')"
           data-tip="R MV&#10;&#10;WHAT&#10;Rank positions this ticker has moved since yesterday.&#10;&#10;HOW TO USE&#10;Big movers (|R Mv| > 20) signal change. Positive = climbing toward rank 1. Negative = falling.&#10;&#10;HOW CONSTRUCTED&#10;Yesterday's rank_alignment minus today's. Requires ≥ 2 days of snapshot data.&#10;&#10;CURRENT STATE&#10;Snapshot capture active since 20 Apr 2026. Will populate meaningfully once ~3 days of history accumulate.">R Mv</th>
       <th class="tip gend" style="min-width:130px" onclick="sb('profile')"
-          data-tip="PROFILE&#10;&#10;WHAT&#10;Taxonomy classifying ticker by rank position + structural state. Adds context that raw rank alone cannot — a rank 117 can be &quot;broken&quot; or &quot;setup&quot; depending on structure.&#10;&#10;CATEGORIES:&#10;  LEADER ACCEL — top rank + accelerating (current leader)&#10;  LEADER EXTENDED — top rank + stretched (late-stage leader)&#10;  LEADER NARROW — top rank, narrower breadth&#10;  MID — middle-pack, no distinctive signal&#10;  SETUP CLEAN — non-leader but structurally clean (emerging candidate)&#10;  SETUP BROAD — non-leader with broader bullish signals&#10;  SETUP RECOVERY — weak but accelerating (potential turn)&#10;  WEAK — weak and declining&#10;&#10;HOW TO USE&#10;Low rank with SETUP CLEAN ≠ low rank with WEAK. Profile disambiguates.&#10;&#10;HOW CONSTRUCTED&#10;Derived from rank_alignment quintile + strength quintile + alignment quintile + q5 quintile + structure state. See spec section 15.">Profile</th>
+          data-tip="PROFILE&#10;&#10;WHAT&#10;Taxonomy classifying ticker by rank position + structural state. Adds context that raw rank alone cannot — a rank 117 can be &quot;broken&quot; or &quot;setup&quot; depending on structure.&#10;&#10;CATEGORIES:&#10;  LEADER ACCEL — top rank + accelerating (current leader)&#10;  LEADER EXTENDED — top rank + stretched (late-stage leader)&#10;  LEADER NARROW — top rank, narrower breadth&#10;  MID — middle-pack, no distinctive signal&#10;  SETUP EMERGING — non-leader but structurally clean and accelerating&#10;  SETUP BROAD — non-leader with broader bullish signals&#10;  SETUP RECOVERY — weak but accelerating (potential turn)&#10;  WEAK DECLINING — weak and still falling&#10;&#10;HOW TO USE&#10;Low rank with SETUP EMERGING ≠ low rank with WEAK DECLINING. Profile disambiguates.&#10;&#10;HOW CONSTRUCTED&#10;Derived from rank_alignment quintile + strength quintile + alignment quintile + q5 quintile + structure state. See spec section 15.">Profile</th>
 
       <th class="gsep tip" style="min-width:52px" onclick="sb('trend')"
           data-tip="TREND&#10;&#10;WHAT&#10;Raw 63-bar trend composite — the long-horizon directional score.&#10;&#10;HOW TO USE&#10;80+ is monster. 50-80 solid. 20-50 mid. Below 0 = long-horizon down.&#10;Compare vs Mom: Trend > Mom = trend established. Mom > Trend = momentum leading (early-stage or fresh breakout).&#10;&#10;HOW CONSTRUCTED&#10;Pine Script 63-bar methodology, from r_universe_live.trend.&#10;&#10;RANGE: -100 to +100.">Trend</th>
@@ -128,7 +139,7 @@ const H={'apikey':KEY,'Authorization':'Bearer '+KEY};
 const RAW_COLS='symbol,name,group_name,watchlist,trend,momentum,perf_1d,perf_5d';
 const FACT_COLS='symbol,rank_alignment,fact_rank_move,q1_rank,q2_rank,q3_rank,q4_rank,q5_p,structure_3p,p01_state,profile';
 
-let all=[],filt=[],sc='rank_alignment',sd=1,wl='UK ETFS',grp='',flag='',pivot='',tm='';
+let all=[],filt=[],sc='rank_alignment',sd=1,wl='UK ETFS',grp='',flag='',pivot='',tm='',prof='';
 let maxRank=0, maxTR=0, maxMR=0, maxVelR=0, maxVolR=0;
 
 async function load(){
@@ -156,6 +167,7 @@ function setGrp(g){grp=g;af();}
 function setFlag(f){flag=f;if(f){scan='';document.getElementById('ssel').value='';}af();}
 function setPivot(p){pivot=p;if(p){scan='';document.getElementById('ssel').value='';}af();}
 function setTM(t){tm=t;if(t){scan='';document.getElementById('ssel').value='';}af();}
+function setProfile(p){prof=p;if(p){scan='';document.getElementById('ssel').value='';}af();}
 
 // Scan presets — each sets a combination of underlying filters
 // scan is a second filter applied AFTER the dropdown filters
@@ -168,6 +180,7 @@ function setScan(s){
     document.getElementById('psel').value='';pivot='';
     document.getElementById('tmsel').value='';tm='';
     document.getElementById('fsel').value='';flag='';
+    document.getElementById('profsel').value='';prof='';
   }
   af();
 }
@@ -253,6 +266,7 @@ function base(){
     if(grp&&r.group_name!==grp)return false;
     if(pivot&&r.structure_3p!==pivot)return false;
     if(tm&&r.p01_state!==tm)return false;
+    if(prof&&r.profile!==prof)return false;
     if(r.rank_alignment==null)return false;
     return true;
   });
@@ -341,10 +355,10 @@ const PROF_DISPLAY={
   '4_LEADER_ACCEL':       {label:'LEADER ACCEL',    col:'#00e676'},
   '5_LEADER_EXTENDED':    {label:'LEADER EXTENDED', col:'#fff'},
   '6_NARROW_LEADER':      {label:'LEADER NARROW',   col:'#fff'},
-  '2_NONLEADER_ACCEL':    {label:'SETUP CLEAN',     col:'#00e676'},
+  '2_NONLEADER_ACCEL':    {label:'SETUP EMERGING',  col:'#00e676'},
   '3_BROAD_MIDSTRENGTH':  {label:'SETUP BROAD',     col:'#fff'},
   '1_WEAK_ACCEL':         {label:'SETUP RECOVERY',  col:'#fff'},
-  '7_WEAK_DECLINING':     {label:'WEAK',            col:'#ff1744'},
+  '7_WEAK_DECLINING':     {label:'WEAK DECLINING',  col:'#ff1744'},
   '0_MID':                {label:'MID',             col:'#fff'}
 };
 const profileCell=v=>{
