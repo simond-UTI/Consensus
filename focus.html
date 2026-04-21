@@ -10,7 +10,7 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
 <div class="top top-nav">
   <span class="logo" style="cursor:pointer" onclick="location.reload()">2H · FOCUS</span>
   <span class="nav-link" onclick="openSpec()" title="System specification">[SPEC]</span>
-  <a class="nav-link" href="./index.html" title="Switch to full fact dashboard">[DATA]</a>
+  <a class="nav-link" href="https://simond-uti.github.io/Consensus/" title="Switch to full fact dashboard">[DATA]</a>
   <select onchange="setWL(this.value)" style="margin-left:8px">
     <option value="UK ETFS">UK</option>
     <option value="MAIN">US</option>
@@ -20,14 +20,14 @@ tbody tr:hover td:first-child{background:#1a1d24}</style></head><body>
 <div class="top top-filters">
   <select id="ssel" onchange="setScan(this.value)">
     <option value="">All Scans</option>
-    <option value="clean_uptrend">Clean Uptrend</option>
-    <option value="uptrend_oversold">Uptrend + Oversold</option>
-    <option value="uptrend_stretched">Uptrend + Stretched</option>
-    <option value="bottom_bull">Bottom Forming + Bull</option>
-    <option value="range_emerging">Range + Emerging Mom</option>
-    <option value="structure_cracked">Uptrend Fail / Top Forming</option>
-    <option value="conviction">Conviction (Speed + Volume)</option>
-    <option value="fading">Fading (Trend > Mom)</option>
+    <option value="clean_uptrend">Uptrend Running</option>
+    <option value="uptrend_oversold">Uptrend Pullback</option>
+    <option value="uptrend_stretched">Uptrend Extended</option>
+    <option value="bottom_bull">Post-Bottom Rally</option>
+    <option value="range_emerging">Range Breaking Out</option>
+    <option value="structure_cracked">Structure Cracked</option>
+    <option value="conviction">Running Hot</option>
+    <option value="fading">Uptrend Fading</option>
   </select>
   <select id="gsel" onchange="setGrp(this.value)">
     <option value="">All Groups</option>
